@@ -1,0 +1,9 @@
+{
+  "yaml.schemas": {
+    "./.vscode/kubernetes.schema.json": [
+      "/*.yaml",
+      "/*.yml"
+    ],
+    "https://www.schemastore.org/kustomization.json": "file:///d%3A/Hopa%20Work/Hopa%20Devops/K8S/nginx.yaml"
+  }
+}
