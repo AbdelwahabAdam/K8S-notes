@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: master-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: master
+
+  template:
+    metadata:
+      labels:
+        app: master
+    spec:
+      containers:
+        - name: master
+          image: master
+          ports:
+            - containerPort: 5000
+            - containerPort: 8080
+            
+

@@ -1,0 +1,70 @@
+version: "3"
+
+
+services:
+  master:
+    build: ./master
+    container_name: master
+    networks:
+      - my_custom_notwork
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+
+  slave1:
+    build: ./slave
+    container_name: slave1
+    networks:
+      - my_custom_notwork
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      SLAVE_NAME: Slave1
+
+  slave2:
+    build: ./slave
+    container_name: slave2
+    networks:
+      - my_custom_notwork
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    environment:
+      SLAVE_NAME: Slave2
+
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    networks:
+      - my_custom_notwork
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mydb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+    - postgres_data:/var/lib/postgresql
+
+    
+networks:
+  my_custom_notwork:
+    driver: bridge
+
+volumes:
+  postgres_data:
