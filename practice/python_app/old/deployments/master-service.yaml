@@ -7,12 +7,10 @@ spec:
   selector:
     app: master
   ports:
-    - name: tcp
-      protocol: TCP
+    - protocol: TCP
       port: 5000
       targetPort: 5000
-    - name: http
-      protocol: TCP
+    - protocol: TCP
       port: 8080
       targetPort: 8080
 

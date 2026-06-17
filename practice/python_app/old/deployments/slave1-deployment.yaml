@@ -1,24 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: slave2-deployment
+  name: slave1-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: slave2
+      app: slave1
 
   template:
     metadata:
       labels:
-        app: slave2
+        app: slave1
     spec:
       containers:
-        - name: slave2
-          image: slave
-          imagePullPolicy: IfNotPresent 
+        - name: slave1
+          image: slave1
           env:
             - name: SLAVE_NAME
-              value: slave2
+              value: Slave1
 
 

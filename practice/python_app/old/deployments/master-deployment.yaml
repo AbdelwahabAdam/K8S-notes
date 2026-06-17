@@ -16,7 +16,6 @@ spec:
       containers:
         - name: master
           image: master
-          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
             - containerPort: 8080

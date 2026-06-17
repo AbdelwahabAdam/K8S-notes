@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name: slave1
-          image: slave1
+          image: slave
+          imagePullPolicy: IfNotPresent
           env:
             - name: SLAVE_NAME
               value: Slave1

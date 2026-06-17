@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slave Monitor</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            margin:20px;
+        }
+
+        table{
+            border-collapse: collapse;
+            width:100%;
+        }
+
+        th,td{
+            border:1px solid #ddd;
+            padding:8px;
+        }
+
+        th{
+            background:#f5f5f5;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Slave Messages</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Message</th>
+            <th>Received At</th>
+        </tr>
+    </thead>
+
+    <tbody id="data"></tbody>
+</table>
+
+<script>
+
+async function loadMessages() {
+
+    const response = await fetch("/api/messages");
+    const messages = await response.json();
+
+    let html = "";
+
+    messages.forEach(msg => {
+
+        html += `
+        <tr>
+            <td>${msg.id}</td>
+            <td>${msg.message}</td>
+            <td>${msg.received_at}</td>
+        </tr>`;
+    });
+
+    document.getElementById("data").innerHTML = html;
+}
+
+loadMessages();
+
+setInterval(loadMessages, 5000);
+
+</script>
+
+</body>
+</html>
